@@ -224,6 +224,42 @@ const AuthWidget = ({ onLoginSuccess }) => {
                          </button>
                     </form>
 
+                    <div className="mt-4 space-y-3">
+                         <div className="relative">
+                              <div className="absolute inset-0 flex items-center">
+                                   <span className="w-full border-t border-gray-100"></span>
+                              </div>
+                              <div className="relative flex justify-center text-xs uppercase">
+                                   <span className="bg-white px-2 text-gray-400">Or continue with</span>
+                              </div>
+                         </div>
+
+                         <button
+                              type="button"
+                              onClick={async () => {
+                                   setAuthLoading(true);
+                                   const { error } = await supabase.auth.signInWithOAuth({
+                                        provider: 'kakao',
+                                        options: {
+                                             redirectTo: window.location.origin,
+                                        },
+                                   });
+                                   if (error) {
+                                        console.error('Kakao login error:', error);
+                                        setAuthError(error.message);
+                                        setAuthLoading(false);
+                                   }
+                              }}
+                              disabled={authLoading}
+                              className="w-full bg-[#FEE500] text-[#191919] font-bold py-3 rounded-xl hover:shadow-lg hover:-translate-y-0.5 transition-all flex items-center justify-center gap-2"
+                         >
+                              <svg viewBox="0 0 24 24" className="w-5 h-5 fill-current">
+                                   <path d="M12 3C5.925 3 1 6.925 1 11.775c0 3.325 2.3 6.175 5.75 7.625-.25.925-1 3.5-1.125 4.075-.025.1.025.2.125.25.075.025.125.025.2-.025.6-.4 3.725-2.525 4.375-3 .775.1 1.575.175 2.4.175 6.075 0 11-3.925 11-8.775C23.725 6.925 18.225 3 12 3z" />
+                              </svg>
+                              카카오로 시작하기
+                         </button>
+                    </div>
+
                     <div className="mt-4 pt-4 border-t border-gray-50 text-center">
                          <p className="text-xs text-gray-400">
                               {isSignUpMode ? '이미 계정이 있으신가요? ' : '아직 계정이 없으신가요? '}
