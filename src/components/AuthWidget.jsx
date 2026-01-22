@@ -241,6 +241,7 @@ const AuthWidget = ({ onLoginSuccess }) => {
                                    const { error } = await supabase.auth.signInWithOAuth({
                                         provider: 'kakao',
                                         options: {
+                                             scopes: 'profile_nickname profile_image',
                                              redirectTo: window.location.origin,
                                         },
                                    });
