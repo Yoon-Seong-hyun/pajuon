@@ -65,7 +65,7 @@ const AuthWidget = ({ onLoginSuccess }) => {
                ? 'https://api.dicebear.com/7.x/avataaars/svg?seed=Felix'
                : 'https://api.dicebear.com/7.x/avataaars/svg?seed=Aneka';
 
-          const { error } = await supabase.auth.signUp({
+          const { data, error } = await supabase.auth.signUp({
                email,
                password,
                options: {
@@ -117,7 +117,7 @@ const AuthWidget = ({ onLoginSuccess }) => {
                <div className="flex flex-col relative z-10">
                     <div className="text-center mb-6">
                          <h2 className="text-xl font-bold text-gray-900 mb-1">
-                              {isSignUpMode ? '파주On 시작하기' : '파주On 로그인'}
+                              {isSignUpMode ? '파주On 시작하기' : '파주On 로그인 (v2)'}
                          </h2>
                          <p className="text-xs text-gray-500">
                               {isSignUpMode ? '이웃과 소통하는 파주 라이프!' : '오늘도 파주에서 즐거운 하루 보내세요!'}
