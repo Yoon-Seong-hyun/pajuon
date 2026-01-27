@@ -63,11 +63,13 @@ const CreatePostModal = ({ onClose, onShare, user }) => {
 
                if (error) throw error;
 
-               const { data: { publicUrl } } = supabase.storage
+
+
+               const { data: urlData } = supabase.storage
                     .from('post-images')
                     .getPublicUrl(fileName);
 
-               return publicUrl;
+               return urlData.publicUrl;
           } catch (error) {
                console.error("Image upload failed:", error);
                // Handle missing bucket error specifically if possible, OR just generic
